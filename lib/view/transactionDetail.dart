@@ -155,7 +155,7 @@ class TransactionDetail extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                    flex: 5,
+                    flex: 2,
                     child: TextField(
                       controller: transDetailController!.titleField,
                       cursorColor: greyText,

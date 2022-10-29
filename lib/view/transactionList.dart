@@ -30,7 +30,19 @@ class TransactionList extends StatelessWidget {
         iconTheme: IconThemeData(color: blackColor),
       ),
       body: transactionController.transactionList.length == 0
-          ? Center(child: Text("No Records"))
+          ? Column(
+              children: [
+                Image.asset(
+                  'assets/sleep.png',
+                  width: 100,
+                  height: 100,
+                ),
+                Text("No Records")
+              ],
+              // .map((e) => Padding(padding: EdgeInsets.only(top: 15.0), child: e)).toList(),
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+            )
           : ListView.separated(
               physics: BouncingScrollPhysics(),
               itemCount: transactionController.transactionList.length,

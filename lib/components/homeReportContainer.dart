@@ -14,6 +14,7 @@ class HomeReportContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salaryController = TextEditingController();
     return Container(
       padding: EdgeInsets.all(15.0),
       margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -35,13 +36,70 @@ class HomeReportContainer extends StatelessWidget {
               Text("SAR", style: TextStyle(color: textINRColor)),
               Expanded(
                 child: AutoSizeText(
-                    transactionController.total.toStringAsFixed(1),
+                    transactionController.total.toStringAsFixed(1), //مهم
                     style: TextStyle(
                         color: greyColor,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                     maxLines: 2,
                     textAlign: TextAlign.center),
+              ),
+              IconButton(
+                icon: Icon(Icons.edit_note),
+                color: Colors.black38,
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  20.0)), //this right here
+                          child: Container(
+                            height: 200,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextField(
+                                    //  color: whiteColor.withOpacity(0.85),
+                                    //  borderRadius: BorderRadius.all(Radius.circular(20.0))
+                                    controller: salaryController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                        hintText: 'write your monthly salary?'),
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.black12,
+                                      alignment: Alignment.center,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    child: SizedBox(
+                                      child: ElevatedButton(
+                                        child: const Text('Continue'),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      transactionController.total =
+                                          double.parse(salaryController.text);
+                                      Navigator.of(context).pop(
+                                          transactionController.total
+                                              .toStringAsFixed(1));
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
               ),
             ],
           ),

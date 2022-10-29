@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
+import '../components/notificatios.dart';
+
 class ReportScreen extends StatelessWidget {
   const ReportScreen({Key? key}) : super(key: key);
   static ReportController? reportController;
@@ -21,7 +23,7 @@ class ReportScreen extends StatelessWidget {
     return Column(
       children: [
         //category selector
-        CategorySelectHeader(),
+        // NotificationsHandler(),
 
         //pie chart, if not full report
         if (reportController!.reportMethod != fullReport)
@@ -63,103 +65,69 @@ class ReportScreen extends StatelessWidget {
 
         //balance container, if full report
         if (reportController!.reportMethod == fullReport)
-          Container(
-            decoration: BoxDecoration(
-                color: primaryColor.withOpacity(0.85),
-                borderRadius: BorderRadius.all(Radius.circular(3.0))),
-            padding: EdgeInsets.all(10.0),
-            width: double.infinity,
-            child: Column(
+
+          //category list
+          Expanded(
+            child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
-                Text("Balance: ${reportController!.total.toStringAsFixed(1)}",
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: whiteColor)),
-                SizedBox(height: 10.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                          "Income:\n${reportController!.totalIncome.toStringAsFixed(1)}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20.0, color: whiteColor)),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                          "Expense:\n${reportController!.totalExpense.toStringAsFixed(1)}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20.0, color: whiteColor)),
-                    ),
-                  ],
+                tile(
+                  title: "Health",
+                  svgName: healthSvg,
+                  incomeAmount: reportController!.healthIncomeAmount,
+                  expenseAmount: reportController!.healthExpenseAmount,
+                ),
+                tile(
+                  title: "Family",
+                  svgName: familySvg,
+                  incomeAmount: reportController!.familyIncomeAmount,
+                  expenseAmount: reportController!.familyExpenseAmount,
+                ),
+                tile(
+                  title: "Shopping",
+                  svgName: shoppingSvg,
+                  incomeAmount: reportController!.shoppingIncomeAmount,
+                  expenseAmount: reportController!.shoppingExpenseAmount,
+                ),
+                tile(
+                  title: "Food",
+                  svgName: foodSvg,
+                  incomeAmount: reportController!.foodIncomeAmount,
+                  expenseAmount: reportController!.foodExpenseAmount,
+                ),
+                tile(
+                  title: "Vehicle",
+                  svgName: vehicleSvg,
+                  incomeAmount: reportController!.vehicleIncomeAmount,
+                  expenseAmount: reportController!.vehicleExpenseAmount,
+                ),
+                tile(
+                  title: "Salon",
+                  svgName: salonSvg,
+                  incomeAmount: reportController!.salonIncomeAmount,
+                  expenseAmount: reportController!.salonExpenseAmount,
+                ),
+                tile(
+                  title: "Devices",
+                  svgName: devicesSvg,
+                  incomeAmount: reportController!.deviceIncomeAmount,
+                  expenseAmount: reportController!.deviceExpenseAmount,
+                ),
+                tile(
+                  title: "Office",
+                  svgName: officeSvg,
+                  incomeAmount: reportController!.officeIncomeAmount,
+                  expenseAmount: reportController!.officeExpenseAmount,
+                ),
+                tile(
+                  title: "Others",
+                  svgName: othersSvg,
+                  incomeAmount: reportController!.othersIncomeAmount,
+                  expenseAmount: reportController!.othersExpenseAmount,
                 ),
               ],
             ),
           ),
-
-        //category list
-        Expanded(
-          child: ListView(
-            physics: BouncingScrollPhysics(),
-            children: [
-              tile(
-                title: "Health",
-                svgName: healthSvg,
-                incomeAmount: reportController!.healthIncomeAmount,
-                expenseAmount: reportController!.healthExpenseAmount,
-              ),
-              tile(
-                title: "Family",
-                svgName: familySvg,
-                incomeAmount: reportController!.familyIncomeAmount,
-                expenseAmount: reportController!.familyExpenseAmount,
-              ),
-              tile(
-                title: "Shopping",
-                svgName: shoppingSvg,
-                incomeAmount: reportController!.shoppingIncomeAmount,
-                expenseAmount: reportController!.shoppingExpenseAmount,
-              ),
-              tile(
-                title: "Food",
-                svgName: foodSvg,
-                incomeAmount: reportController!.foodIncomeAmount,
-                expenseAmount: reportController!.foodExpenseAmount,
-              ),
-              tile(
-                title: "Vehicle",
-                svgName: vehicleSvg,
-                incomeAmount: reportController!.vehicleIncomeAmount,
-                expenseAmount: reportController!.vehicleExpenseAmount,
-              ),
-              tile(
-                title: "Salon",
-                svgName: salonSvg,
-                incomeAmount: reportController!.salonIncomeAmount,
-                expenseAmount: reportController!.salonExpenseAmount,
-              ),
-              tile(
-                title: "Devices",
-                svgName: devicesSvg,
-                incomeAmount: reportController!.deviceIncomeAmount,
-                expenseAmount: reportController!.deviceExpenseAmount,
-              ),
-              tile(
-                title: "Office",
-                svgName: officeSvg,
-                incomeAmount: reportController!.officeIncomeAmount,
-                expenseAmount: reportController!.officeExpenseAmount,
-              ),
-              tile(
-                title: "Others",
-                svgName: othersSvg,
-                incomeAmount: reportController!.othersIncomeAmount,
-                expenseAmount: reportController!.othersExpenseAmount,
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

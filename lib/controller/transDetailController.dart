@@ -11,7 +11,7 @@ class TransDetailController with ChangeNotifier {
 
   bool isIncomeSelected = false;
   bool savedTransaction = false;
-
+  // String boolsalarySaved;
   String selectedDepartment = others;
 
   int? transactionId;
@@ -48,6 +48,7 @@ class TransDetailController with ChangeNotifier {
 
   void toTransactionDetail({
     required bool isSaved,
+    String? saveDone,
     int? id,
     String? title,
     String? description,
@@ -57,6 +58,7 @@ class TransDetailController with ChangeNotifier {
     String? dateTime,
   }) {
     savedTransaction = isSaved;
+    // salarySaved = saveDone;
     transactionId = id;
     titleField.text = title ?? "";
     descriptionField.text = description ?? "";

@@ -18,7 +18,7 @@ class CategorySelectHeader extends StatelessWidget {
         padding: EdgeInsets.all(5.0),
         child: IconButton(
             icon: Icon(Icons.calendar_today),
-            color: Colors.blueGrey,
+            color: greyColor,
             onPressed: () async {
               DateTimeRange? picked = await showDateRangePicker(
                   context: context,

@@ -22,7 +22,14 @@ class RecentTransList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: transController.transactionList.length == 0
-          ? Center(child: Text("No Records"))
+          ? Column(children: [
+              Image.asset(
+                'assets/sleep.png',
+                width: 100,
+                height: 100,
+              ),
+              Text("No Records")
+            ])
           : ListView.builder(
               physics: BouncingScrollPhysics(),
               itemCount: 7,
